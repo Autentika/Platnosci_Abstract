@@ -3,7 +3,7 @@ Klasa Platnosci_Abstract przeznaczona jest do budowy skryptu obsługującego kom
 h2. Wykorzystanie klasy Platnosci_Abstract
 
 Obsługa komunikatów z platnosci.pl musi składać się z dwóch części:
-# klasy dziedziczącej z Platnosci_Abstract i implementującej odpowiednie metody
+# klasy dziedziczącej z Platnosci_Abstract i implementującej metody abstrakcyjne
 # skryptu odbierającego komunikaty od platnosci.pl i przetwarzającego je przy użyciu obiektu ww. klasy
 
 h2. Klasa obsługująca komunikaty
