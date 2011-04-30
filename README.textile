@@ -1,0 +1,35 @@
+Klasa Platnosci_Abstract przeznaczona jest do budowy skryptu obsługującego komunikaty otrzymywane z systemu przelewów online platnosci.pl
+
+h2. Wykorzystanie klasy Platnosci_Abstract
+
+Obsługa komunikatów z platnosci.pl musi składać się z dwóch części:
+# klasy dziedziczącej z Platnosci_Abstract i implementującej odpowiednie metody
+# skryptu odbierającego komunikaty od platnosci.pl i przetwarzającego je przy użyciu obiektu ww. klasy
+
+h2. Klasa obsługująca komunikaty
+
+Wykorzystanie klasy wymaga zaimplementowania 3 metod:
+* isSessionIdExists - jako parametr przyjmująca session_id transakcji, powinna zwrócić true, jeśli transakcja już istnieje w naszym systemie, w przeciwnym wypadku musi zwrócić false
+* onStatusChange - wywoływana po otrzymaniu poprawnych informacji o aktualnym stanie transakcji. Informacje te są przekazywane do metody w postaci tablicy
+* onError - metoda wywoływana po wystąpieniu błędu (umożliwia np. zapisywanie informacji o błędach do logów). Jako parametry do metody przesyłane jest session_id transakcji która wywołała błąd, tablica zawierająca błędy oraz tablica z parametrami dodatkowymi (przydatnymi przy rozpoznaniu błędu)
+
+Metody dodatkowe:
+* error - zapisuje informację o wystąpieniu błędu, jako parametr przyjmuje kod błędu oraz opcjonalne parametry pomocne przy rozpoznaniu problemu.
+* throwException - jeśli wcześniej wystąpiły błędy (zapisane przez wywołania metody error) wywoływana jest metoda onError, a następnie wyrzucany jest wyjątek Platnosci_Exception
+
+h2. Proces odbioru komunikatu
+
+Przebieg procesu odbioru komunikatu od platnosci.pl wygląda następująco:
+# Weryfikacja przychodzącego komunikatu informującego o zmianie stanu transakcji
+## wyliczenie i zweryfikowanie podpisu (sig)
+## sprawdzenie poprawności ID punktu płatności (pos_id)
+## uruchomienie metody isSessionIdExists w celu sprawdzenia, czy transakcja istnieje w naszym systemie
+# Sprawdzenie aktualnego stanu transakcji
+## Wysłanie do platnosci.pl zapytania o aktualny stan transakcji
+## Zamiana otrzymanego dokumentu XML na tablicę wartości
+## Weryfikacja poprawności otrzymanych danych (czy status dokumentu jest OK, poprawność pos_id i session_id)
+## uruchomienie metody onStatusChange, do której przekazane zostają informacje o aktualnym stanie transakcji
+
+h2. Przykład implementacji
+
+Przykład zastosowania klasy Platnosci_Abstract znajduje się w katalogu examples.
