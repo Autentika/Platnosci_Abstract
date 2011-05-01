@@ -7,7 +7,7 @@
  * @license		New BSD License
  * @author		Daniel Kózka
  */
-abstract class Core_Platnosci_Abstract
+abstract class Platnosci_Abstract
 {
 	// stałe opisuące typy błędów
 	const BAD_DETAILS_POS_ID = 0;
@@ -110,7 +110,7 @@ abstract class Core_Platnosci_Abstract
 	/**
 	 * Rozpoczyna proces aktualizacji statusu transakcji
 	 *
-	 * @throws 	Core_Platnosci_Exception
+	 * @throws 	Platnosci_Exception
 	 * @param 	array 	$aParams	tablica z komunikatem
 	 * @return	void
 	 */
@@ -123,7 +123,7 @@ abstract class Core_Platnosci_Abstract
 	/**
 	 * Sprawdza status transakcji (wywołuje metodę onStatusChange)
 	 *
-	 * @throws 	Core_Platnosci_Exception
+	 * @throws 	Platnosci_Exception
 	 * @param 	string	$sSessionId		identyfikator transakcji
 	 * @return	void
 	 */
@@ -151,7 +151,7 @@ abstract class Core_Platnosci_Abstract
 	/**
 	 * Uruchamian funkcję onErrors która domyślie rzuca wyjątkiem z błędami
 	 *
-	 * @throws	Core_Platnosci_Exception
+	 * @throws	Platnosci_Exception
 	 * @param	string	$sSessionId		identyfikator transakcji
 	 * @return 	void
 	 */
@@ -161,7 +161,7 @@ abstract class Core_Platnosci_Abstract
 		{
 			$this->onError($sSessionId, $this->aErrors, $this->aErrorsParams);
 			// rzuca wyjątkiem
-			throw new Core_Platnosci_Exception($sSessionId, $this->aErrors, $this->aErrorsParams);
+			throw new Platnosci_Exception($sSessionId, $this->aErrors, $this->aErrorsParams);
 		}
 	}
 
@@ -228,7 +228,7 @@ abstract class Core_Platnosci_Abstract
 	/**
 	 * Weryfikuje poprawność otrzymanego komunikatu
 	 *
-	 * @throws 	Core_Platnosci_Exception
+	 * @throws 	Platnosci_Exception
 	 * @param 	array	$aParams	tablica z paramterami komunikatu
 	 * @return 	void
 	 */
@@ -263,7 +263,7 @@ abstract class Core_Platnosci_Abstract
 	/**
 	 * Weryfikuje poprawnosc detali otrzymanych z platnosci.pl
 	 *
-	 * @throws 	Core_Platnosci_Exception
+	 * @throws 	Platnosci_Exception
 	 * @param 	array	$aData			tablica z detalami transakcji
 	 * @param	string	$sSessionId		identyfikator transakcji
 	 * @return	void

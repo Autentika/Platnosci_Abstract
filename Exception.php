@@ -7,7 +7,7 @@
  * @license		New BSD License
  * @author		Daniel Kózka
  */
-class Core_Platnosci_Exception extends Exception
+class Platnosci_Exception extends Exception
 {
 	/**
 	 * Tablica na błędy
